@@ -1,7 +1,13 @@
-sudo: required
+os:
+  - osx
 
-services:
-  - docker
+before install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./script/homebrew-install.sh; fi
 
-script:
-  - docker build .
+script: ./script/install
+
+env:
+  global:
+    - TMUX=y
+    - GIT_AUTHOR_NAME="Michael Mior"
+    - GIT_AUTHOR_EMAIL="michael.mior@gmail.com"
